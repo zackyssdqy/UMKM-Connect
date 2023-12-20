@@ -134,14 +134,14 @@ fun JetWarcengApp(
                     }
                 )
             }
-            composable(Screen.Cart.route) {
-                val content = LocalContext.current
-                CartScreen(
-                    onOrderButtonClicked = {message->
-                        shareOrder(content, message)
-                    }
-                )
-            }
+//            composable(Screen.Cart.route) {
+//                val content = LocalContext.current
+//                CartScreen(
+//                    onOrderButtonClicked = {message->
+//                        shareOrder(content, message)
+//                    }
+//                )
+//            }
             composable(Screen.Profile.route) {
                 ProfileScreen()
             }

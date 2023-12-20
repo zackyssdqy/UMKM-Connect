@@ -76,7 +76,7 @@ fun DetailScreen(
                     image = data.menu.image,
                     title = data.menu.title,
                     desc = data.menu.desc,
-                    basePrice = data.menu.price,
+                    basePrice = data.menu.location,
                     count = data.count,
                     onBackClick = navigateBack,
                     onAddToCart = {count ->

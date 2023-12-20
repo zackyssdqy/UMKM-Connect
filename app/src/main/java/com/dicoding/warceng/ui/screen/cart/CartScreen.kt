@@ -32,6 +32,8 @@ import com.dicoding.warceng.ui.common.UiState
 import com.dicoding.warceng.ui.components.OrderButton
 import com.dicoding.warceng.ui.components.OrderMenuItem
 
+
+
 @Composable
 fun CartScreen(
     viewModel: CartViewModel = viewModel(
@@ -99,7 +101,7 @@ fun CartContent(
                     menuId = item.menu.id,
                     image = item.menu.image,
                     title = item.menu.title,
-                    price = item.menu.price * item.count,
+                    price = item.menu.location * item.count,
                     count = item.count,
                     onProductCountChanged = onProductCountChanged
                 )

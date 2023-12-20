@@ -117,7 +117,7 @@ fun HomeContent(
     ) {
         HeaderHome(R.drawable.hasanalbana)
         SearchBar(query = "", onQueryChange = {String}, modifier = Modifier.padding(top = 15.dp))
-        SectionText(title = "Recomendation"){
+        SectionText(title = "Kategori"){
             Column(
                 Modifier.padding(top = 15.dp)
             ) {
@@ -141,7 +141,7 @@ fun HomeContent(
                 }
             }
         }
-        SectionText(title = "Cek yang menarik di U-Con") {
+        SectionText(title = "Cobain Rekomendasi Dari Kami Yuk!") {
             LazyRow(
                 modifier = modifier.padding(top = 20.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
@@ -150,27 +150,10 @@ fun HomeContent(
                     MenuItem(
                         image = data.menu.image,
                         title = data.menu.title,
-                        price = data.menu.price,
+                        location = data.menu.location,
                         modifier = modifier.clickable {
                             navigateToDetail(data.menu.id)
                         },
-                    )
-                }
-            }
-        }
-        SectionText(title = "Best-Selling Menu") {
-            LazyRow(
-                modifier = modifier.padding(top = 20.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp),
-            ){
-                items(orderMenu){data->
-                    MenuItem(
-                        image = data.menu.image,
-                        title = data.menu.title,
-                        price = data.menu.price,
-                        modifier = modifier.clickable {
-                            navigateToDetail(data.menu.id)
-                        }
                     )
                 }
             }

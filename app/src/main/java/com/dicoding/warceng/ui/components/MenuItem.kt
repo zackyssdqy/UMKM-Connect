@@ -34,7 +34,7 @@ import com.dicoding.warceng.ui.theme.coffeeColor
 fun MenuItem(
     image: Int,
     title: String,
-    price: Int,
+    location: Int,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -70,7 +70,7 @@ fun MenuItem(
                     )
                 )
                 Text(
-                    text = stringResource(id = R.string.menu_price, price),
+                    text = stringResource(id = R.string.menu_price, location),
                     style = MaterialTheme.typography.titleSmall,
                     color = coffeeColor
                 )

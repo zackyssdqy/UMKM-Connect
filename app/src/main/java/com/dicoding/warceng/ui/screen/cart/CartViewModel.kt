@@ -19,7 +19,7 @@ class CartViewModel(private val repository: MenuRepository): ViewModel() {
             repository.getAddedOrderMenu()
                 .collect { orderMenu ->
                     val totalRequiredPoint =
-                        orderMenu.sumOf { it.menu.price * it.count }
+                        orderMenu.sumOf { it.menu.location * it.count }
                     _uiState.value = UiState.Success(CartState(orderMenu, totalRequiredPoint))
                 }
         }
