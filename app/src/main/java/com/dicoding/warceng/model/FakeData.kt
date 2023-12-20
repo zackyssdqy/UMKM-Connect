@@ -1,0 +1,20 @@
+package com.dicoding.warceng.model
+import com.dicoding.warceng.R
+
+object FakeData {
+    val dummyMenu = listOf(
+        Menu(1, R.drawable.kuliner_1, "Drink", "Satay, or sate in Indonesian spelling, is a Southeast Asian form of kebab made from seasoned, skewered and barbecued meat, served with a sauce. The earliest preparations of satay are believed to have originated in Java island, but has spread to almost anywhere in Indonesia, where it has become a national dish", "Satay Ayam", 5),
+        Menu(2, R.drawable.fashion_3, "Dessert", "A clothes shop or clothes store is any shop which sells items of ready-made clothing. A small shop which sells expensive or designer clothing may be called a boutique. A shop that sells clothes for a narrowly restricted market such as school uniforms or outdoor sports may be called an outfitter", "Toko Baju Aku", 10),
+        Menu(3, R.drawable.otomotif_1, "Food", "Beginning with the Industrial Revolution era, a workshop may be a room, rooms or building which provides both the area and tools that may be required for the manufacture or repair of manufactured goods.", "Bengkel Harapanmu", 15),
+        Menu(4, R.drawable.otomotif_2, "Food", "Suku cadang atau onderdil (serapan dari Belanda: onderdeel) adalah komponen dari mesin yang dicadangkan untuk perbaikan atau penggantian bagian kendaraan yang mengalami kerusakan. Suku cadang merupakan bagian penting dalam manajemen logistik dan manajemen rantai pasok.[1][2]", "Toko Oderdil Bambang", 5),
+        Menu(5, R.drawable.otomotif_3, "Food", "Custom motor mobil disini pokoknya bgus deh. percaya aja. kamu bisa order sama kami. nanti akan diarahkan.", "Custom Motor/Mobil", 20),
+        Menu(6, R.drawable.fashion_1, "Dessert", "A clothes shop or clothes store is any shop which sells items of ready-made clothing. A small shop which sells expensive or designer clothing may be called a boutique. A shop that sells clothes for a narrowly restricted market such as school uniforms or outdoor sports may be called an outfitter", "Toko Baju Kita", 10),
+        Menu(7, R.drawable.otomotif, "Appetizer", "Ice Creame coklat yang nikmat bikin kamu ceri seharian penuh", "Ice Cream Coklat Ceria", 8),
+        Menu(8, R.drawable.fashion, "Appetizer", "Fruit Es yang cocok dimakan di cuacaa panas gini, bikin kamu nyaman", "Fruit Benih Cinta Rasa", 15),
+        Menu(9, R.drawable.fashion_2, "Dessert", "A clothes shop or clothes store is any shop which sells items of ready-made clothing. A small shop which sells expensive or designer clothing may be called a boutique. A shop that sells clothes for a narrowly restricted market such as school uniforms or outdoor sports may be called an outfitter", "Toko Baju Kamu", 7),
+        Menu(10, R.drawable.kuliner_2, "Drink", "Pempek, mpek-mpek and also known as colloquially as empek-empek is a savoury Indonesian fishcake delicacy, made of fish and tapioca, from Palembang, South Sumatera, Indonesia. Pempek is served with rich sweet and sour sauce called kuah cuka or kuah cuko, or just \"cuko\"", "Pempek Palembang", 6),
+        Menu(11, R.drawable.kuliner_3, "Drink", "Motabbaq is a stuffed pancake or pan-fried bread which is commonly found in the Arabian Peninsula, South Asia and Southeast Asia, notably in Saudi Arabia, Yemen, Indonesia, Malaysia, Singapore, Brunei, Southern Thailand and Bangladesh. Depending on the location, the name and ingredients can significantly vary.", "Martabak Suka-Suka", 9),
+        Menu(12, R.drawable.kuliner_4, "Drink", "A fritter is a portion of meat, seafood, fruit, vegetables, or other ingredients which have been battered or breaded, or just a portion of dough without further ingredients, that is deep-fried. Fritters are prepared in both sweet and savory varieties.", "Gorengan Mantan", 10),
+        Menu(13, R.drawable.kuliner_5, "Drink", "Padang food or Minangkabau food is the cuisine of the Minangkabau people of West Sumatra, Indonesia. It is among the most popular cuisines in Maritime Southeast Asia. It is known across Indonesia as Masakan Padang after Padang, the capital city of Western Sumatra province", "Masakan Padang Nusantara", 10),
+    )
+}
