@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.dicoding.warceng.R
 import com.dicoding.warceng.di.Injection
-import com.dicoding.warceng.model.OrderMenu
+import com.dicoding.warceng.model.Umkm
 import com.dicoding.warceng.ui.ViewModelFactory
 import com.dicoding.warceng.ui.common.UiState
 import com.dicoding.warceng.ui.components.CategoryMenuItem
@@ -44,14 +44,15 @@ fun CategoryScreen(
     navigateToDetail: (Long) -> Unit,
     navigateBack: () -> Unit,
 ) {
-    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let {uiState ->
+    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
-                viewModel.getMenuByCategory(category)
+                viewModel.getUmkmByCategory(category)
             }
+
             is UiState.Success -> {
                 CategoryContent(
-                    orderMenu = uiState.data,
+                    umkm = uiState.data,
                     navigateToDetail = navigateToDetail,
                     onBackClick = navigateBack,
                 )
@@ -65,7 +66,7 @@ fun CategoryScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CategoryContent(
-    orderMenu: List<OrderMenu>,
+    umkm: List<Umkm>,
     modifier: Modifier = Modifier,
     navigateToDetail: (Long) -> Unit,
     onBackClick: () -> Unit
@@ -96,14 +97,14 @@ fun CategoryContent(
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier.weight(weight = 1f)
-        ){
-            items(orderMenu){data->
+        ) {
+            items(umkm) { data ->
                 CategoryMenuItem(
-                    image = data.menu.image,
-                    title = data.menu.title,
-                    location = data.menu.location,
+                    image = data.image,
+                    title = data.title,
+                    location = data.location,
                     modifier = modifier.clickable {
-                        navigateToDetail(data.menu.id)
+                        navigateToDetail(data.id)
                     },
                 )
             }

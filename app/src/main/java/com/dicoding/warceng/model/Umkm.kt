@@ -1,6 +1,6 @@
 package com.dicoding.warceng.model
 
-data class Menu(
+data class Umkm(
     val id: Long,
     val image: Int,
     val type: String,

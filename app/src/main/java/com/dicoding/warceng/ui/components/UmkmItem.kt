@@ -1,90 +1,99 @@
 package com.dicoding.warceng.ui.components
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.dicoding.warceng.R
+import com.dicoding.warceng.ui.theme.LightGray
 import com.dicoding.warceng.ui.theme.WarcengAppTheme
 import com.dicoding.warceng.ui.theme.coffeeColor
 
 @Composable
-fun MenuItem(
+fun CategoryMenuItem(
     image: Int,
     title: String,
     location: String,
     modifier: Modifier = Modifier
 ) {
     Card(
-        modifier = modifier.width(120.dp),
-        shape = RoundedCornerShape(8.dp),
-        border = BorderStroke(1.dp, coffeeColor),
+        modifier = modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(10.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White
+            containerColor = LightGray
         ),
     ) {
-        Column {
+        Row(
+            verticalAlignment = Alignment.CenterVertically
+        ){
             Image(
                 painter = painterResource(image),
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .padding(
-                        top = 10.dp,
-                        start = 10.dp,
-                        end = 10.dp
+                        horizontal = 10.dp,
+                        vertical = 10.dp
                     )
-                    .fillMaxWidth()
-                    .height(100.dp)
+                    .size(90.dp)
                     .clip(RoundedCornerShape(10.dp))
             )
-            Column(modifier = Modifier.padding(10.dp)) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .weight(1.0f)
+            ) {
                 Text(
                     text = title,
                     maxLines = 1,
+                    fontSize = 16.sp,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontWeight = FontWeight.ExtraBold
+                    style = MaterialTheme.typography.titleSmall.copy(
+                        fontWeight = FontWeight.Medium
                     )
                 )
-                Text(
-                    text = location,
-                    style = MaterialTheme.typography.titleSmall,
-                    color = coffeeColor
-                )
-
             }
+            Text(
+                text = location,
+                color = coffeeColor,
+                fontSize = 16.sp,
+                style = MaterialTheme.typography.titleSmall.copy(
+                    fontWeight = FontWeight.Medium
+                ),
+                modifier = Modifier
+                    .padding(
+                        end = 20.dp
+                    )
+            )
         }
     }
 }
 
 @Preview
 @Composable
-fun MenuItemPrev() {
+fun CategoryMenuItem() {
     WarcengAppTheme {
-        MenuItem(
-            R.drawable.souvenir,
-            "Coffee Mantan",
-            "Sleman",
+        CategoryMenuItem(
+            R.drawable.souvenir, "Coffee Mantan", "Sleman"
         )
     }
 }

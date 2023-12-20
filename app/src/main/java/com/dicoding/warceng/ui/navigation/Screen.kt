@@ -7,7 +7,7 @@ sealed class Screen(val route: String){
     object Category: Screen("category/{typeCategory}"){
         fun createRoute(typeCategory: String) = "category/$typeCategory"
     }
-    object DetailMenu: Screen("home/{menuId}"){
-        fun createRoute(menuId: Long) = "home/$menuId"
+    object DetailUmkm: Screen("home/{umkmId}"){
+        fun createRoute(umkmId: Long) = "home/$umkmId"
     }
 }

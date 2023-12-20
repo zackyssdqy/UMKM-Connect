@@ -1,13 +1,10 @@
 package com.dicoding.warceng
 
-import android.content.Context
-import android.content.Intent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -49,17 +46,17 @@ fun BottomBar(
         val currentRoute = navBackStackEntry?.destination?.route
         val navigationItems = listOf(
             NavigationItem(
-                title = stringResource(id = R.string.menu_home),
+                title = stringResource(id = R.string.home),
                 icon = Icons.Default.Home,
                 screen = Screen.Home
             ),
             NavigationItem(
-                title = stringResource(id = R.string.menu_cart),
+                title = stringResource(id = R.string.favorite),
                 icon = Icons.Default.Favorite,
                 screen = Screen.Favorite
             ),
             NavigationItem(
-                title = stringResource(id = R.string.menu_about),
+                title = stringResource(id = R.string.about),
                 icon = Icons.Default.AccountCircle,
                 screen = Screen.Profile
             ),
@@ -94,7 +91,7 @@ fun JetWarcengApp(
     val currentRoute = navBackStackEntry?.destination?.route
     Scaffold(
         bottomBar = {
-            if(currentRoute == Screen.DetailMenu.route){
+            if(currentRoute == Screen.DetailUmkm.route){
 
             }else if(currentRoute == Screen.Category.route){
 
@@ -111,8 +108,8 @@ fun JetWarcengApp(
         ) {
             composable(Screen.Home.route) {
                 HomeScreen(
-                    navigateToDetail = { menuId->
-                        navController.navigate(Screen.DetailMenu.createRoute(menuId))
+                    navigateToDetail = { umkmId->
+                        navController.navigate(Screen.DetailUmkm.createRoute(umkmId))
                     },
                     navigateToCategory = { categoryType->
                         navController.navigate(Screen.Category.createRoute(categoryType))
@@ -126,14 +123,14 @@ fun JetWarcengApp(
                 ProfileScreen()
             }
             composable(
-                route = Screen.DetailMenu.route,
-                arguments = listOf(navArgument("menuId"){
+                route = Screen.DetailUmkm.route,
+                arguments = listOf(navArgument("umkmId"){
                     type = NavType.LongType
                 })
             ){
-                val id = it.arguments?.getLong("menuId") ?: -1L
+                val id = it.arguments?.getLong("umkmId") ?: -1L
                 DetailScreen(
-                    menuId = id,
+                    umkmId = id,
                     navigateBack = {
                         navController.navigateUp()
                     }
@@ -152,8 +149,8 @@ fun JetWarcengApp(
                     navigateBack = {
                         navController.navigateUp()
                     },
-                    navigateToDetail = { menuId->
-                        navController.navigate(Screen.DetailMenu.createRoute(menuId))
+                    navigateToDetail = { umkmId->
+                        navController.navigate(Screen.DetailUmkm.createRoute(umkmId))
                     },
                 )
             }

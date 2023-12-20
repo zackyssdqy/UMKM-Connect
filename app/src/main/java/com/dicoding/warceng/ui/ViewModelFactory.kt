@@ -2,13 +2,13 @@ package com.dicoding.warceng.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.warceng.data.MenuRepository
+import com.dicoding.warceng.data.UmkmRepository
 //import com.dicoding.warceng.ui.screen.cart.CartViewModel
 import com.dicoding.warceng.ui.screen.category.CategoryViewModel
 import com.dicoding.warceng.ui.screen.detail.DetailViewModel
 import com.dicoding.warceng.ui.screen.home.HomeViewModel
 
-class ViewModelFactory(val repository: MenuRepository) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(val repository: UmkmRepository) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

@@ -26,13 +26,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.dicoding.warceng.R
 import com.dicoding.warceng.di.Injection
-import com.dicoding.warceng.model.OrderMenu
+import com.dicoding.warceng.model.Umkm
 import com.dicoding.warceng.ui.ViewModelFactory
 import com.dicoding.warceng.ui.common.UiState
-import com.dicoding.warceng.R
-import com.dicoding.warceng.ui.components.CategoriesItem
-import com.dicoding.warceng.ui.components.MenuItem
+import com.dicoding.warceng.ui.components.CategoryItem
+import com.dicoding.warceng.ui.components.UmkmItem
 import com.dicoding.warceng.ui.components.SearchBar
 import com.dicoding.warceng.ui.components.SectionText
 import com.dicoding.warceng.ui.theme.coffeeColor
@@ -46,15 +46,16 @@ fun HomeScreen(
     navigateToDetail: (Long) -> Unit,
     navigateToCategory: (String) -> Unit,
 ) {
-    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let {uiState->
-        when(uiState){
+    viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
+        when (uiState) {
             is UiState.Loading -> {
-                viewModel.getAllMenu()
+                viewModel.getAllUmkm()
             }
+
             is UiState.Error -> {}
             is UiState.Success -> {
                 HomeContent(
-                    orderMenu = uiState.data,
+                    umkm = uiState.data,
                     modifier = modifier,
                     navigateToDetail = navigateToDetail,
                     navigateToCategory = navigateToCategory
@@ -102,7 +103,7 @@ fun HeaderHome(
 
 @Composable
 fun HomeContent(
-    orderMenu: List<OrderMenu>,
+    umkm: List<Umkm>,
     modifier: Modifier = Modifier,
     navigateToDetail: (Long) -> Unit,
     navigateToCategory: (String) -> Unit,
@@ -116,28 +117,40 @@ fun HomeContent(
             )
     ) {
         HeaderHome(R.drawable.hasanalbana)
-        SearchBar(query = "", onQueryChange = {String}, modifier = Modifier.padding(top = 15.dp))
-        SectionText(title = "Kategori"){
+        SearchBar(query = "", onQueryChange = { String }, modifier = Modifier.padding(top = 15.dp))
+        SectionText(title = "Kategori") {
             Column(
                 Modifier.padding(top = 15.dp)
             ) {
-                Row{
-                    CategoriesItem(image = R.drawable.souvenir, title = "Kuliner", modifier = Modifier.clickable {
-                        navigateToCategory("Drink")
-                    })
+                Row {
+                    CategoryItem(
+                        image = R.drawable.souvenir,
+                        title = "Kuliner",
+                        modifier = Modifier.clickable {
+                            navigateToCategory("Drink")
+                        })
                     Spacer(modifier = Modifier.width(5.dp))
-                    CategoriesItem(image = R.drawable.fashion, title = "Fashion", modifier = Modifier.clickable {
-                        navigateToCategory("Dessert")
-                    })
+                    CategoryItem(
+                        image = R.drawable.fashion,
+                        title = "Fashion",
+                        modifier = Modifier.clickable {
+                            navigateToCategory("Dessert")
+                        })
                 }
-                Row(Modifier.padding(top = 10.dp)){
-                    CategoriesItem(image = R.drawable.otomotif, title = "Otomotif", modifier = Modifier.clickable {
-                        navigateToCategory("Food")
-                    })
+                Row(Modifier.padding(top = 10.dp)) {
+                    CategoryItem(
+                        image = R.drawable.otomotif,
+                        title = "Otomotif",
+                        modifier = Modifier.clickable {
+                            navigateToCategory("Food")
+                        })
                     Spacer(modifier = Modifier.width(5.dp))
-                    CategoriesItem(image = R.drawable.souvenir, title = "Souvenir", modifier = Modifier.clickable {
-                        navigateToCategory("Appetizer")
-                    })
+                    CategoryItem(
+                        image = R.drawable.souvenir,
+                        title = "Souvenir",
+                        modifier = Modifier.clickable {
+                            navigateToCategory("Appetizer")
+                        })
                 }
             }
         }
@@ -145,14 +158,14 @@ fun HomeContent(
             LazyRow(
                 modifier = modifier.padding(top = 20.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
-            ){
-                items(orderMenu){data->
-                    MenuItem(
-                        image = data.menu.image,
-                        title = data.menu.title,
-                        location = data.menu.location,
+            ) {
+                items(umkm) { data ->
+                    UmkmItem(
+                        image = data.image,
+                        title = data.title,
+                        location = data.location,
                         modifier = modifier.clickable {
-                            navigateToDetail(data.menu.id)
+                            navigateToDetail(data.id)
                         },
                     )
                 }

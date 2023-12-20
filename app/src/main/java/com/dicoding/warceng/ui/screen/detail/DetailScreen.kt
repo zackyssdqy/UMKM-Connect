@@ -22,10 +22,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -48,7 +44,7 @@ import com.dicoding.warceng.ui.theme.WarcengAppTheme
 
 @Composable
 fun DetailScreen(
-    menuId: Long,
+    umkmId: Long,
     viewModel: DetailViewModel = viewModel(
         factory = ViewModelFactory(
             Injection.provideRepository()
@@ -59,21 +55,17 @@ fun DetailScreen(
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
             is UiState.Loading -> {
-                viewModel.getMenuById(menuId)
+                viewModel.getUmkmById(umkmId)
             }
 
             is UiState.Success -> {
                 val data = uiState.data
                 DetailContent(
-                    image = data.menu.image,
-                    title = data.menu.title,
-                    desc = data.menu.desc,
-                    location = data.menu.location,
-                    count = data.count,
+                    image = data.image,
+                    title = data.title,
+                    desc = data.desc,
+                    location = data.location,
                     onBackClick = navigateBack,
-                    onAddToCart = {count ->
-                        viewModel.addToCart(data.menu, count)
-                    }
                 )
             }
 
@@ -89,13 +81,9 @@ fun DetailContent(
     title: String,
     desc: String,
     location: String,
-    count: Int,
     onBackClick: () -> Unit,
-    onAddToCart: (count: Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var totalPrice by rememberSaveable { mutableStateOf(0) }
-    var orderCount by rememberSaveable { mutableStateOf(count) }
 
     Column(modifier = modifier) {
         CenterAlignedTopAppBar(
@@ -160,7 +148,10 @@ fun DetailContent(
                     color = Color.Black
                 )
             }
-            SectionText(title = "Despkripsi Toko", modifier = Modifier.padding(horizontal = 24.dp)) {
+            SectionText(
+                title = "Despkripsi Toko",
+                modifier = Modifier.padding(horizontal = 24.dp)
+            ) {
                 Text(
                     text = desc,
                     overflow = TextOverflow.Ellipsis,
@@ -183,9 +174,7 @@ fun DetailContentPrev() {
             "Jaket Hoodie Dicoding",
             "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es",
             "Sleman",
-            1,
             onBackClick = {},
-            onAddToCart = {}
         )
     }
 }
