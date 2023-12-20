@@ -6,5 +6,7 @@ data class Umkm(
     val type: String,
     val desc: String,
     val title: String,
-    val location: String
+    val location: String,
+    val isFavorite: Boolean = false
+
 )

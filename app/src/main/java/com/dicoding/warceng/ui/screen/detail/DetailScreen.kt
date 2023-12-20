@@ -2,23 +2,30 @@ package com.dicoding.warceng.ui.screen.detail
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -31,7 +38,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -40,7 +46,6 @@ import com.dicoding.warceng.di.Injection
 import com.dicoding.warceng.ui.ViewModelFactory
 import com.dicoding.warceng.ui.common.UiState
 import com.dicoding.warceng.ui.components.SectionText
-import com.dicoding.warceng.ui.theme.WarcengAppTheme
 
 @Composable
 fun DetailScreen(
@@ -66,6 +71,10 @@ fun DetailScreen(
                     desc = data.desc,
                     location = data.location,
                     onBackClick = navigateBack,
+                    isFavorite = data.isFavorite,
+                    onFavClick = {
+                        viewModel.addUmkmFavorite(data.id, !data.isFavorite)
+                    }
                 )
             }
 
@@ -81,12 +90,14 @@ fun DetailContent(
     title: String,
     desc: String,
     location: String,
+    isFavorite: Boolean,
+    onFavClick: () -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
     Column(modifier = modifier) {
-        CenterAlignedTopAppBar(
+        TopAppBar(
             title = {
                 Text(
                     text = stringResource(id = R.string.screen_detail),
@@ -103,7 +114,17 @@ fun DetailContent(
                     Icon(Icons.Filled.ArrowBack, "backIcon")
                 }
             },
-
+            actions = {
+                Button(
+                    onClick = onFavClick,
+                    content = {
+                        Icon(
+                            if (isFavorite) Icons.Filled.Favorite else Icons.Filled.FavoriteBorder,
+                            contentDescription = "Favorite"
+                        )
+                    }
+                )
+            },
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                 containerColor = Color.White
             )
@@ -165,16 +186,16 @@ fun DetailContent(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun DetailContentPrev() {
-    WarcengAppTheme {
-        DetailContent(
-            R.drawable.souvenir,
-            "Jaket Hoodie Dicoding",
-            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es",
-            "Sleman",
-            onBackClick = {},
-        )
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun DetailContentPrev() {
+//    WarcengAppTheme {
+//        DetailContent(
+//            R.drawable.souvenir,
+//            "Jaket Hoodie Dicoding",
+//            "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es",
+//            "Sleman",
+//            onBackClick = {},
+//        )
+//    }
+//}

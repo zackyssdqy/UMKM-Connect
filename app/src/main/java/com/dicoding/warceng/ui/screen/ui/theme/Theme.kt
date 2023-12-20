@@ -1,4 +1,4 @@
-package com.dicoding.warceng.ui.screen.cart.ui.theme
+package com.dicoding.warceng.ui.screen.ui.theme
 
 import android.app.Activity
 import android.os.Build

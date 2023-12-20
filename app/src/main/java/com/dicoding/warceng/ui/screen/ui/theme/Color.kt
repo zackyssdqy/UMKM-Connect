@@ -1,4 +1,4 @@
-package com.dicoding.warceng.ui.screen.cart.ui.theme
+package com.dicoding.warceng.ui.screen.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

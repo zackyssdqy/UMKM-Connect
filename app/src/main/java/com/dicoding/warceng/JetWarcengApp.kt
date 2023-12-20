@@ -26,7 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.dicoding.warceng.ui.navigation.NavigationItem
 import com.dicoding.warceng.ui.navigation.Screen
-import com.dicoding.warceng.ui.screen.cart.FavoriteScreen
+import com.dicoding.warceng.ui.screen.favorite.FavoriteScreen
 import com.dicoding.warceng.ui.screen.category.CategoryScreen
 import com.dicoding.warceng.ui.screen.detail.DetailScreen
 import com.dicoding.warceng.ui.screen.home.HomeScreen
@@ -116,9 +116,7 @@ fun JetWarcengApp(
                     }
                 )
             }
-            composable(Screen.Favorite.route) {
-                FavoriteScreen()
-            }
+
             composable(Screen.Profile.route) {
                 ProfileScreen()
             }
@@ -136,7 +134,16 @@ fun JetWarcengApp(
                     }
                 )
             }
-
+            composable(Screen.Favorite.route) {
+                FavoriteScreen(
+                    navigateBack = {
+                        navController.navigateUp()
+                    },
+                    navigateToDetail = { umkmId->
+                        navController.navigate(Screen.DetailUmkm.createRoute(umkmId))
+                    },
+                )
+            }
             composable(
                 route = Screen.Category.route,
                 arguments = listOf(navArgument("typeCategory"){

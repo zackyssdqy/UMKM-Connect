@@ -21,4 +21,12 @@ class DetailViewModel(private val repository: UmkmRepository) : ViewModel() {
         }
     }
 
+    fun addUmkmFavorite(id: Long, isFavorite:Boolean) =
+        viewModelScope.launch {
+            repository.updateUmkm(id, isFavorite)
+                .collect{
+                    if (it) getUmkmById(id)
+                }
+        }
+
 }

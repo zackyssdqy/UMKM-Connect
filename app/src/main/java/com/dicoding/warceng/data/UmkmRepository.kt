@@ -23,7 +23,6 @@ class UmkmRepository {
         return flowOf(umkm)
     }
 
-
     fun getAllUmkmByCategory(category: String): Flow<List<Umkm>>{
         return getAllUmkm().map { menu->
             menu.filter { menu ->
@@ -36,6 +35,22 @@ class UmkmRepository {
         return umkm.first {
             it.id == menuId
         }
+    }
+
+    fun getFavoriteUmkm(): Flow<List<Umkm>>{
+        return flowOf(umkm.filter { it.isFavorite })
+    }
+
+    fun updateUmkm(id: Long, newValue: Boolean): Flow<Boolean> {
+        val index = umkm.indexOfFirst { it.id == id }
+        val result = if (index >= 0) {
+            val heroDota = umkm[index]
+            umkm[index] = heroDota.copy(isFavorite = newValue)
+            true
+        } else {
+            false
+        }
+        return flowOf(result)
     }
 
     companion object {
