@@ -2,15 +2,12 @@ package com.dicoding.warceng.ui.screen.detail
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -29,7 +26,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -47,11 +43,8 @@ import com.dicoding.warceng.R
 import com.dicoding.warceng.di.Injection
 import com.dicoding.warceng.ui.ViewModelFactory
 import com.dicoding.warceng.ui.common.UiState
-import com.dicoding.warceng.ui.components.OrderButton
-import com.dicoding.warceng.ui.components.ProductCounter
 import com.dicoding.warceng.ui.components.SectionText
 import com.dicoding.warceng.ui.theme.WarcengAppTheme
-import com.dicoding.warceng.ui.theme.coffeeColor
 
 @Composable
 fun DetailScreen(
@@ -62,7 +55,6 @@ fun DetailScreen(
         )
     ),
     navigateBack: () -> Unit,
-    navigateToCart: () -> Unit
 ) {
     viewModel.uiState.collectAsState(initial = UiState.Loading).value.let { uiState ->
         when (uiState) {
@@ -76,12 +68,11 @@ fun DetailScreen(
                     image = data.menu.image,
                     title = data.menu.title,
                     desc = data.menu.desc,
-                    basePrice = data.menu.location,
+                    location = data.menu.location,
                     count = data.count,
                     onBackClick = navigateBack,
                     onAddToCart = {count ->
                         viewModel.addToCart(data.menu, count)
-                        navigateToCart()
                     }
                 )
             }
@@ -97,7 +88,7 @@ fun DetailContent(
     @DrawableRes image: Int,
     title: String,
     desc: String,
-    basePrice: Int,
+    location: String,
     count: Int,
     onBackClick: () -> Unit,
     onAddToCart: (count: Int) -> Unit,
@@ -124,6 +115,7 @@ fun DetailContent(
                     Icon(Icons.Filled.ArrowBack, "backIcon")
                 }
             },
+
             colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
                 containerColor = Color.White
             )
@@ -160,7 +152,7 @@ fun DetailContent(
                     )
                 )
                 Text(
-                    text = stringResource(id = R.string.menu_price, basePrice),
+                    text = location,
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontSize = 20.sp,
                         fontWeight = FontWeight.ExtraBold
@@ -179,40 +171,6 @@ fun DetailContent(
                 )
             }
         }
-        Spacer(modifier = Modifier
-            .fillMaxWidth()
-            .height(4.dp)
-            .background(Color.LightGray))
-        Row(
-            modifier = Modifier.padding(horizontal = 24.dp, vertical = 20.dp)
-        ) {
-            Column {
-                totalPrice = basePrice * orderCount
-                Text(
-                    text = stringResource(id = R.string.menu_price, totalPrice),
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontSize = 20.sp,
-                        fontWeight = FontWeight.ExtraBold
-                    ),
-                    color = coffeeColor,
-                )
-                ProductCounter(
-                    orderId = 1,
-                    orderCount = orderCount,
-                    onProductIncreased = { orderCount++ },
-                    onProductDecreased = { if(orderCount > 0) orderCount-- }
-                )
-            }
-            Spacer(modifier = Modifier.width(30.dp))
-            OrderButton(
-                text = "Order Now",
-                enable = orderCount > 0,
-                onClick = {
-                    onAddToCart(orderCount)
-                },
-                modifier = Modifier.align(Alignment.CenterVertically)
-            )
-        }
     }
 }
 
@@ -224,7 +182,7 @@ fun DetailContentPrev() {
             R.drawable.souvenir,
             "Jaket Hoodie Dicoding",
             "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id es",
-            15,
+            "Sleman",
             1,
             onBackClick = {},
             onAddToCart = {}

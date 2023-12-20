@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
@@ -16,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -29,7 +29,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.dicoding.warceng.ui.navigation.NavigationItem
 import com.dicoding.warceng.ui.navigation.Screen
-import com.dicoding.warceng.ui.screen.cart.CartScreen
+import com.dicoding.warceng.ui.screen.cart.FavoriteScreen
 import com.dicoding.warceng.ui.screen.category.CategoryScreen
 import com.dicoding.warceng.ui.screen.detail.DetailScreen
 import com.dicoding.warceng.ui.screen.home.HomeScreen
@@ -55,8 +55,8 @@ fun BottomBar(
             ),
             NavigationItem(
                 title = stringResource(id = R.string.menu_cart),
-                icon = Icons.Default.ShoppingCart,
-                screen = Screen.Cart
+                icon = Icons.Default.Favorite,
+                screen = Screen.Favorite
             ),
             NavigationItem(
                 title = stringResource(id = R.string.menu_about),
@@ -83,21 +83,6 @@ fun BottomBar(
             )
         }
     }
-}
-
-private fun shareOrder(context: Context, summary: String) {
-    val intent = Intent(Intent.ACTION_SEND).apply {
-        type = "text/plain"
-        putExtra(Intent.EXTRA_SUBJECT, context.getString(R.string.warceng_order))
-        putExtra(Intent.EXTRA_TEXT, summary)
-    }
-
-    context.startActivity(
-        Intent.createChooser(
-            intent,
-            context.getString(R.string.warceng_order)
-        )
-    )
 }
 
 @Composable
@@ -134,14 +119,9 @@ fun JetWarcengApp(
                     }
                 )
             }
-//            composable(Screen.Cart.route) {
-//                val content = LocalContext.current
-//                CartScreen(
-//                    onOrderButtonClicked = {message->
-//                        shareOrder(content, message)
-//                    }
-//                )
-//            }
+            composable(Screen.Favorite.route) {
+                FavoriteScreen()
+            }
             composable(Screen.Profile.route) {
                 ProfileScreen()
             }
@@ -156,19 +136,10 @@ fun JetWarcengApp(
                     menuId = id,
                     navigateBack = {
                         navController.navigateUp()
-                    },
-                    navigateToCart = {
-                        navController.popBackStack()
-                        navController.navigate(Screen.Cart.route){
-                            popUpTo(navController.graph.findStartDestination().id){
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
                     }
                 )
             }
+
             composable(
                 route = Screen.Category.route,
                 arguments = listOf(navArgument("typeCategory"){

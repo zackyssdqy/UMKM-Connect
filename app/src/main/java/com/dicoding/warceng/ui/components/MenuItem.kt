@@ -3,17 +3,14 @@ package com.dicoding.warceng.ui.components
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -34,7 +31,7 @@ import com.dicoding.warceng.ui.theme.coffeeColor
 fun MenuItem(
     image: Int,
     title: String,
-    location: Int,
+    location: String,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -70,28 +67,11 @@ fun MenuItem(
                     )
                 )
                 Text(
-                    text = stringResource(id = R.string.menu_price, location),
+                    text = location,
                     style = MaterialTheme.typography.titleSmall,
                     color = coffeeColor
                 )
-                OutlinedButton(
-                    onClick = {},
-                    border = BorderStroke(1.dp, coffeeColor),
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color.White
-                    ),
-                    contentPadding = PaddingValues(
-                        horizontal = 5.dp
-                    ),
-                    shape = RoundedCornerShape(5.dp),
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Add To Cart",
-                        style = MaterialTheme.typography.titleSmall,
-                        color = coffeeColor
-                    )
-                }
+
             }
         }
     }
@@ -104,7 +84,7 @@ fun MenuItemPrev() {
         MenuItem(
             R.drawable.souvenir,
             "Coffee Mantan",
-            5,
+            "Sleman",
         )
     }
 }

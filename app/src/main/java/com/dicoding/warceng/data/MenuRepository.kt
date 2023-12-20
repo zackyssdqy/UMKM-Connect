@@ -49,15 +49,6 @@ class MenuRepository {
         return flowOf(result)
     }
 
-    fun getAddedOrderMenu(): Flow<List<OrderMenu>> {
-        return getAllMenu()
-            .map { orderMenu ->
-                orderMenu.filter { orderMenu ->
-                    orderMenu.count != 0
-                }
-            }
-    }
-
     companion object {
         @Volatile
         private var instance: MenuRepository? = null

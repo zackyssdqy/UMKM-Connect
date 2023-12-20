@@ -101,7 +101,7 @@ fun CategoryContent(
                 CategoryMenuItem(
                     image = data.menu.image,
                     title = data.menu.title,
-                    price = data.menu.location,
+                    location = data.menu.location,
                     modifier = modifier.clickable {
                         navigateToDetail(data.menu.id)
                     },

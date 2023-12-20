@@ -32,7 +32,7 @@ import com.dicoding.warceng.ui.theme.coffeeColor
 fun CategoryMenuItem(
     image: Int,
     title: String,
-    price: Int,
+    location: String,
     modifier: Modifier = Modifier
 ) {
     Card(
@@ -74,7 +74,7 @@ fun CategoryMenuItem(
                 )
             }
             Text(
-                text = stringResource(id = R.string.menu_price, price),
+                text = location,
                 color = coffeeColor,
                 fontSize = 16.sp,
                 style = MaterialTheme.typography.titleSmall.copy(
@@ -94,7 +94,7 @@ fun CategoryMenuItem(
 fun CategoryMenuItem() {
     WarcengAppTheme {
         CategoryMenuItem(
-            R.drawable.souvenir, "Coffee Mantan", 5
+            R.drawable.souvenir, "Coffee Mantan", "Sleman"
         )
     }
 }

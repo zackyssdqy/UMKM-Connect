@@ -6,5 +6,5 @@ data class Menu(
     val type: String,
     val desc: String,
     val title: String,
-    val location: Int
+    val location: String
 )
